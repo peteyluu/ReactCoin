@@ -7,7 +7,7 @@ const Page = ({ page, totalPages }) => {
     <div className="page">
       <button className="page-button">&larr;</button>
       <span className="page-info">
-        page <b>{page}</b> of <b>{totalPages}</b>
+        Page <b>{page}</b> of <b>{totalPages}</b>
       </span>
       <button className="page-button">&rarr;</button>
     </div>
