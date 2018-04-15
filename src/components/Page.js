@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import page from '../css/page.css';
 
 const Page = ({ page, totalPages }) => {
@@ -11,6 +12,11 @@ const Page = ({ page, totalPages }) => {
       <button className="page-button">&rarr;</button>
     </div>
   )
+};
+
+Page.propTypes = {
+  page: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
 };
 
 export default Page;
