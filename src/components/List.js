@@ -3,6 +3,7 @@ import { handleResponse } from '../helpers/helpers';
 import { API_ROOT_URL } from '../helpers/config';
 import Loading from './Loading';
 import Table from './Table';
+import Page from './Page';
 
 class List extends React.Component {
   constructor() {
@@ -11,12 +12,17 @@ class List extends React.Component {
       loading: false,
       currencies: [],
       error: null,
+      totalPages: 0,
+      page: 1,
     };
   }
 
   componentDidMount() {
     this.setState({ loading: true });
-    fetch(`${API_ROOT_URL}/cryptocurrencies?page=1&perPage=20`)
+
+    const { page } = this.state;
+
+    fetch(`${API_ROOT_URL}/cryptocurrencies?page=${page}&perPage=20`)
       .then(handleResponse)
       .then((data) => {
         this.setState({
@@ -43,7 +49,7 @@ class List extends React.Component {
   }
 
   render() {
-    const { loading, error, currencies } = this.state;
+    const { loading, error, currencies, page, totalPages } = this.state;
     if (loading) {
       return <div className="loading-container"><Loading /></div>
     }
@@ -51,9 +57,16 @@ class List extends React.Component {
       return <div className="error">{error}</div>
     }
     return (
-      <Table
-        currencies={currencies}
-        renderChangePercent={this.renderChangePercent.bind(this)} />
+      <div>
+        <Table
+          currencies={currencies}
+          renderChangePercent={this.renderChangePercent.bind(this)}
+        />
+        <Page
+          page={page}
+          totalPages={totalPages}
+        />
+      </div>
     );
   }
 }
