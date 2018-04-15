@@ -2,7 +2,7 @@ import React from 'react';
 import { handleResponse } from '../helpers/helpers';
 import { API_ROOT_URL } from '../helpers/config';
 import Loading from './Loading';
-import '../css/table.css';
+import Table from './Table';
 
 class List extends React.Component {
   constructor() {
@@ -51,39 +51,9 @@ class List extends React.Component {
       return <div className="error">{error}</div>
     }
     return (
-      <div className="table-container">
-        <table className="table">
-          <thead className="table-head">
-            <tr>
-              <th>Cryptocurrency</th>
-              <th>Price</th>
-              <th>Market Cap</th>
-              <th>24H Change</th>
-            </tr>
-          </thead>
-          <tbody className="table-body">
-            {
-              currencies.map((currency) => (
-                <tr key={currency.id}>
-                  <td>
-                    <span className="table-rank">{currency.rank}</span>
-                    {currency.name}
-                  </td>
-                  <td>
-                    <span className="table-dollar">$ {currency.price}</span>
-                  </td>
-                  <td>
-                    <span className="table-dollar">$ {currency.marketCap}</span>
-                  </td>
-                  <td>
-                    {this.renderChangePercent(currency.percentChange24h)}
-                  </td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-      </div>
+      <Table
+        currencies={currencies}
+        renderChangePercent={this.renderChangePercent.bind(this)} />
     );
   }
 }
