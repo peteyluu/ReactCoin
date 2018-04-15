@@ -1,21 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { handleResponse } from '../helpers/helpers';
 import { API_ROOT_URL } from '../helpers/config';
 import Loading from './Loading';
 import Table from './Table';
 import Page from './Page';
 
-class List extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      loading: false,
-      currencies: [],
-      error: null,
-      totalPages: 0,
-      page: 1,
-    };
-  }
+class List extends Component {
+  state = {
+    loading: false,
+    currencies: [],
+    error: null,
+    totalPages: 0,
+    page: 1,
+  };
 
   componentDidMount() {
     this.setState({ loading: true });
