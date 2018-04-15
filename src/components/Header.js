@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.svg';
 import '../css/header.css';
 
 const Header = () => {
   return (
     <div className="header">
-      <img src={logo} alt="logo" className="header-logo" />
+      <img src={logo} className="header-logo" alt="logo" />
     </div>
   );
 };
