@@ -37,7 +37,7 @@ class List extends Component {
       });
   }
 
-  renderChangePercent(percent) {
+  renderChangePercent = (percent) => {
     if (percent > 0) {
       return <span className="percent-raised">{percent}% &uarr;</span>
     } else if (percent < 0) {
@@ -45,6 +45,12 @@ class List extends Component {
     } else {
       return <span>{percent}</span>
     }
+  }
+
+  handlePageClick = (direction) => {
+    let { page } = this.state;
+    page = direction === 'next' ? page + 1: page - 1;
+    this.setState({ page });
   }
 
   render() {
@@ -59,11 +65,12 @@ class List extends Component {
       <div>
         <Table
           currencies={currencies}
-          renderChangePercent={this.renderChangePercent.bind(this)}
+          renderChangePercent={this.renderChangePercent}
         />
         <Page
           page={page}
           totalPages={totalPages}
+          handlePageClick={this.handlePageClick}
         />
       </div>
     );
