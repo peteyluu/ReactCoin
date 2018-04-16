@@ -23,8 +23,8 @@ class List extends PureComponent {
   }
 
   handlePageClick = (direction) => {
-    let { page, togglePage } = this.props;
-    if (direction === 'prev' && page <= 1) return;
+    let { page, totalPages, togglePage } = this.props;
+    if (direction === 'prev' && page <= 1|| direction === 'next' && page >= totalPages) return;
     page = direction === 'next' ? page + 1: page - 1;
     togglePage(page);
   }
@@ -60,6 +60,7 @@ List.propTypes = {
   totalCurrencies: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
   fetchCurrencies: PropTypes.func.isRequired,
+  togglePage: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => state;
