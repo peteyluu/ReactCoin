@@ -54,6 +54,7 @@ class List extends PureComponent {
 }
 
 List.propTypes = {
+  loading: PropTypes.bool.isRequired,
   currencies: PropTypes.array.isRequired,
   error: PropTypes.object,
   page: PropTypes.number.isRequired,
