@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchCurrency } from '../actions/currency';
 import Loading from './Loading';
@@ -21,11 +22,17 @@ class Detail extends PureComponent {
   }
 
   render () {
-    const { loading, error, currency } = this.props;
+    const { loading, error, currency, history } = this.props;
     if (loading) return <div className="loading-container"><Loading /></div>
     if (error) return <div className="error">{error}</div>
     return (
       <div className="detail">
+        <button
+          className="page-button"
+          onClick={() => history.goBack()}
+        >
+        &larr;
+      </button>
         <h1 className="detail-heading">
           {currency.name} ({currency.symbol})
         </h1>
