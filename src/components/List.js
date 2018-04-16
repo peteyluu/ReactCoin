@@ -1,40 +1,14 @@
-import React, { Component } from 'react';
-import { handleResponse } from '../helpers/helpers';
-import { API_ROOT_URL } from '../helpers/config';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import Loading from './Loading';
 import Table from './Table';
 import Page from './Page';
 
-class List extends Component {
-  state = {
-    loading: false,
-    currencies: [],
-    error: null,
-    totalPages: 0,
-    page: 1,
-  };
+import { fetchCurrencies } from '../actions/currencies';
 
+class List extends PureComponent {
   componentDidMount() {
-    this.setState({ loading: true });
-
-    const { page } = this.state;
-
-    fetch(`${API_ROOT_URL}/cryptocurrencies?page=${page}&perPage=20`)
-      .then(handleResponse)
-      .then((data) => {
-        const { currencies, totalPages } = data;
-        this.setState({
-          currencies,
-          totalPages,
-          loading: false
-        });
-      })
-      .catch((error) => {
-        this.setState({
-          error: error.errorMessage,
-          loading: false
-        });
-      });
+    this.props.fetchCurrencies();
   }
 
   renderChangePercent = (percent) => {
@@ -54,7 +28,7 @@ class List extends Component {
   }
 
   render() {
-    const { loading, error, currencies, page, totalPages } = this.state;
+    const { loading, error, currencies, page, totalPages } = this.props;
     if (loading) {
       return <div className="loading-container"><Loading /></div>
     }
@@ -77,4 +51,6 @@ class List extends Component {
   }
 }
 
-export default List;
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps, { fetchCurrencies })(List);
