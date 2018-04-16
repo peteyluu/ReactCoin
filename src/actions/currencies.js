@@ -29,11 +29,15 @@ const togglePageAction = page => ({
   page,
 });
 
-export const fetchCurrencies = () => dispatch => {
-  fetch(`${API_ROOT_URL}/cryptocurrencies?page=1&perPage=20`)
+export const fetchCurrencies = () => (dispatch, getState) => {
+  const { page } = getState();
+  fetch(`${API_ROOT_URL}/cryptocurrencies?page=${page}&perPage=20`)
     .then(handleResponse)
     .then(data => dispatch(fetchCurrenciesSuccess(data)))
     .catch(error => dispatch(fetchCurrenciesFailure(error)))
 };
 
-export const togglePage = page => dispatch => dispatch(togglePageAction(page));
+export const togglePage = (page, cb) => dispatch => {
+  dispatch(togglePageAction(page));
+  cb();
+}

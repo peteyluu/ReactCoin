@@ -23,10 +23,12 @@ class List extends PureComponent {
   }
 
   handlePageClick = (direction) => {
-    let { page, totalPages, togglePage } = this.props;
+    let { page, totalPages, togglePage, fetchCurrencies } = this.props;
     if (direction === 'prev' && page <= 1|| direction === 'next' && page >= totalPages) return;
     page = direction === 'next' ? page + 1: page - 1;
-    togglePage(page);
+    togglePage(page, () => {
+      fetchCurrencies();
+    });
   }
 
   render() {
