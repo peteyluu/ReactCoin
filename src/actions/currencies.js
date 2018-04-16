@@ -30,7 +30,7 @@ const togglePageAction = page => ({
 });
 
 export const fetchCurrencies = () => (dispatch, getState) => {
-  const { page } = getState();
+  const { page } = getState().currencies;
   fetch(`${API_ROOT_URL}/cryptocurrencies?page=${page}&perPage=20`)
     .then(handleResponse)
     .then(data => dispatch(fetchCurrenciesSuccess(data)))

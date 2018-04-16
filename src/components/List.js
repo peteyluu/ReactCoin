@@ -63,7 +63,7 @@ List.propTypes = {
   togglePage: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => state.currencies;
 
 export default connect(
   mapStateToProps,
