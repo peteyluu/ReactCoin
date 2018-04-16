@@ -1,7 +1,7 @@
 import {
   FETCH_CURRENCIES_SUCCESS,
   FETCH_CURRENCIES_FAILURE,
-  TOGGLE_LOADING,
+  TOGGLE_PAGE,
 } from './types';
 import { handleResponse } from '../helpers/helpers';
 import { API_ROOT_URL } from '../helpers/config';
@@ -20,8 +20,13 @@ const fetchCurrenciesFailure = error => ({
   type: FETCH_CURRENCIES_FAILURE,
   payload: {
     loading: false,
-    error: error
+    error: error,
   },
+});
+
+const togglePageAction = page => ({
+  type: TOGGLE_PAGE,
+  page,
 });
 
 export const fetchCurrencies = () => dispatch => {
@@ -30,3 +35,5 @@ export const fetchCurrencies = () => dispatch => {
     .then(data => dispatch(fetchCurrenciesSuccess(data)))
     .catch(error => dispatch(fetchCurrenciesFailure(error)))
 };
+
+export const togglePage = page => dispatch => dispatch(togglePageAction(page));

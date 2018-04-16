@@ -1,6 +1,7 @@
 import {
   FETCH_CURRENCIES_SUCCESS,
   FETCH_CURRENCIES_FAILURE,
+  TOGGLE_PAGE,
 } from '../actions/types';
 
 const initialState = {
@@ -28,6 +29,11 @@ export default (state = initialState, action) => {
         loading: action.payload.loading,
         error: action.payload.error
       };
+    case TOGGLE_PAGE:
+      return {
+        ...state,
+        page: action.page,
+      }
     default:
       return state;
   }

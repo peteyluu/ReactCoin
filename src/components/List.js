@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Spinner from 'react-spinner';
 import Loading from './Loading';
 import Table from './Table';
 import Page from './Page';
-import { fetchCurrencies } from '../actions/currencies';
+import { fetchCurrencies, togglePage } from '../actions/currencies';
 
 class List extends PureComponent {
   componentDidMount() {
@@ -13,18 +14,19 @@ class List extends PureComponent {
 
   renderChangePercent = (percent) => {
     if (percent > 0) {
-      return <span className="percent-raised">{percent}% &uarr;</span>
+      return <span className="percent-raised">&uarr; {percent}%</span>
     } else if (percent < 0) {
-      return <span className="percent-fallen">{percent}% &darr;</span>
+      return <span className="percent-fallen">&darr; {percent}%</span>
     } else {
       return <span>{percent}</span>
     }
   }
 
   handlePageClick = (direction) => {
-    let { page } = this.state;
+    let { page, togglePage } = this.props;
+    if (direction === 'prev' && page <= 1) return;
     page = direction === 'next' ? page + 1: page - 1;
-    this.setState({ page });
+    togglePage(page);
   }
 
   render() {
@@ -61,4 +63,8 @@ List.propTypes = {
 };
 
 const mapStateToProps = state => state;
-export default connect(mapStateToProps, { fetchCurrencies })(List);
+
+export default connect(
+  mapStateToProps,
+  { fetchCurrencies, togglePage },
+)(List);
