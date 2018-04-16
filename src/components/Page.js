@@ -8,6 +8,7 @@ const Page = ({ page, totalPages, handlePageClick }) => {
       <button
         className="page-button"
         onClick={() => handlePageClick('prev')}
+        disabled={page <= 1}
       >
         &larr;
       </button>
@@ -17,6 +18,7 @@ const Page = ({ page, totalPages, handlePageClick }) => {
       <button
         className="page-button"
         onClick={() => handlePageClick('next')}
+        disabled={page >= totalPages}
       >
         &rarr;
       </button>
