@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Spinner from 'react-spinner';
 import Loading from './Loading';
 import Table from './Table';
 import Page from './Page';

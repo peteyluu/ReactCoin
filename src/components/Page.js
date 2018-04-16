@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import page from '../css/page.css';
+import '../css/page.css';
 
 const Page = ({ page, totalPages, handlePageClick }) => {
   return (
