@@ -6,27 +6,27 @@ import {
 import { handleResponse } from '../helpers/helpers';
 import { API_ROOT_URL } from '../helpers/config';
 
+const fetchCurrenciesSuccess = data => ({
+  type: FETCH_CURRENCIES_SUCCESS,
+  payload: {
+    loading: false,
+    currencies: data.currencies,
+    totalCurrencies: data.totalCurrencies,
+    totalPages: data.totalPages,
+  },
+});
+
+const fetchCurrenciesFailure = error => ({
+  type: FETCH_CURRENCIES_FAILURE,
+  payload: {
+    loading: false,
+    error: error
+  },
+});
+
 export const fetchCurrencies = () => dispatch => {
   fetch(`${API_ROOT_URL}/cryptocurrencies?page=1&perPage=20`)
     .then(handleResponse)
-    .then((data) => {
-      dispatch({
-        type: FETCH_CURRENCIES_SUCCESS,
-        payload: {
-          loading: false,
-          currencies: data.currencies,
-          totalCurrencies: data.totalCurrencies,
-          totalPages: data.totalPages,
-        },
-      });
-    })
-    .catch((error) => {
-      dispatch({
-        type: FETCH_CURRENCIES_FAILURE,
-        payload: {
-          loading: false,
-          error: error
-        },
-      });
-    });
+    .then(data => dispatch(fetchCurrenciesSuccess(data)))
+    .catch(error => dispatch(fetchCurrenciesFailure(error)))
 };
