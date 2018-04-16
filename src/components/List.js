@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Loading from './Loading';
 import Table from './Table';
 import Page from './Page';
-
 import { fetchCurrencies } from '../actions/currencies';
 
 class List extends PureComponent {
@@ -51,6 +51,14 @@ class List extends PureComponent {
   }
 }
 
-const mapStateToProps = state => state;
+List.propTypes = {
+  currencies: PropTypes.array.isRequired,
+  error: PropTypes.object,
+  page: PropTypes.number.isRequired,
+  totalCurrencies: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  fetchCurrencies: PropTypes.func.isRequired,
+};
 
+const mapStateToProps = state => state;
 export default connect(mapStateToProps, { fetchCurrencies })(List);

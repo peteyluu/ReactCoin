@@ -21,7 +21,6 @@ export const fetchCurrencies = () => dispatch => {
       });
     })
     .catch((error) => {
-      console.log('Error: ', error);
       dispatch({
         type: FETCH_CURRENCIES_FAILURE,
         payload: {
@@ -30,4 +29,4 @@ export const fetchCurrencies = () => dispatch => {
         },
       });
     });
-}
+};
