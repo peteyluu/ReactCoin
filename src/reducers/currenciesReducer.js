@@ -21,13 +21,13 @@ export default (state = initialState, action) => {
         loading: action.payload.loading,
         currencies: action.payload.currencies,
         totalCurrencies: action.payload.totalCurrencies,
-        totalPages: action.payload.totalPages
+        totalPages: action.payload.totalPages,
       };
     case FETCH_CURRENCIES_FAILURE:
       return {
         ...state,
         loading: action.payload.loading,
-        error: action.payload.error
+        error: action.payload.error,
       };
     case TOGGLE_PAGE:
       return {
