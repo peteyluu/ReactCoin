@@ -32,6 +32,10 @@
   cursor: pointer;
 }
 
+.table-body tr:hover {
+  box-shadow: 0px 0px 40px 0px#9cb3c9;
+}
+
 .table-rank {
   color: #9cb3c9;
   margin-right: 18px;
