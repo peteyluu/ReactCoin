@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
 import { API_ROOT_URL } from '../helpers/config';
 import { handleResponse } from '../helpers/helpers';
+import Loading from './Loading';
 import '../css/search.css';
 
 class Search extends PureComponent {
   constructor() {
     super();
     this.state = {
+      loading: true,
       query: '',
     };
   }
@@ -21,6 +23,7 @@ class Search extends PureComponent {
   }
 
   render() {
+    const { loading } = this.state;
     return (
       <div className="search">
         <span className="search-icon"></span>
@@ -30,6 +33,12 @@ class Search extends PureComponent {
           onChange={this.handleChange}
           placeholder="Currency name"
         />
+        {
+          loading &&
+          <div className="search-loading">
+            <Loading width="12px" height="12px" />
+          </div>
+        }
       </div>
     );
   }
