@@ -5,21 +5,22 @@ import Loading from './Loading';
 import '../css/search.css';
 
 class Search extends PureComponent {
-  constructor() {
-    super();
-    this.state = {
-      loading: true,
-      query: '',
-    };
-  }
+  state = {
+    loading: false,
+    query: '',
+  };
 
   handleChange = (event) => {
     const query = event.target.value;
     this.setState({ query });
     if (!query) return;
+    this.setState({ loading: true });
     fetch(`${API_ROOT_URL}/autocomplete?searchQuery=${query}`)
       .then(handleResponse)
-      .then(data => console.log(data))
+      .then((data) => {
+        console.log(data);
+        this.setState({ loading: false });
+      })
   }
 
   render() {
@@ -33,12 +34,10 @@ class Search extends PureComponent {
           onChange={this.handleChange}
           placeholder="Currency name"
         />
-        {
-          loading &&
+        {loading &&
           <div className="search-loading">
             <Loading width="12px" height="12px" />
-          </div>
-        }
+          </div>}
       </div>
     );
   }
