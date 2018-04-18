@@ -1,13 +1,19 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchCurrency } from '../actions/currency';
 import Loading from './Loading';
 import '../css/detail.css';
 
-class Detail extends PureComponent {
+class Detail extends Component {
   componentDidMount() {
     this.props.fetchCurrency(this.props.match.params.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.location.pathname !== nextProps.location.pathname) {
+      this.props.fetchCurrency(nextProps.match.params.id);
+    }
   }
 
   renderChangePercent = (percent) => {
