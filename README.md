@@ -1,4 +1,4 @@
-# ReactC0in
+# reactc0in
 
 > Cryptocurrency Tracker
 
