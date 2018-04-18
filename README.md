@@ -1,9 +1,9 @@
-# React Coin
+# ReactC0in
 
-> Description
+> Cryptocurrency Tracker
 
 ## Deployed Link
-
+[Demo](https://reactc0in.herokuapp.com/)
 
 ## Table of Contents
 
@@ -27,8 +27,6 @@ npm start
 
 - Node 9.2.0
 - NPM 5.5.1
-- etc
-- etc
 
 ## Development
 
@@ -41,6 +39,8 @@ npm install
 ```
 ## Build With
 
-* Bullet0
-* Bullet1
-* Bullet2
+* react
+* redux
+* react-router-dom
+* html
+* css
